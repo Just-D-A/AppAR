@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 4a55cfab1fdf27e4fa9482075d6fcca2
-timeCreated: 1510768034
-licenseType: Store
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Surface: {instanceID: 0}
+  - marker_1: {fileID: 2800000, guid: 31df1d1c00147394689b9ac7278d284c, type: 3}
+  - marker_2: {fileID: 2800000, guid: 682df2ebec1b9bc49bf60a5779d885e8, type: 3}
+  - marker_3: {fileID: 2800000, guid: bf6be6d2b7b80bd41a3d51485f717a6a, type: 3}
+  - marker_4: {fileID: 2800000, guid: a4688cc9b0c482b48a614db7e1e68258, type: 3}
+  - marker_5: {fileID: 2800000, guid: 634297454ddca8b4e82e4ce8199eeac6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
