@@ -5,6 +5,7 @@
 	using OpenCvSharp;
 	using System.Collections.Generic;
 
+
 	public class LiveSketchScript : WebCamera
 	{
 		public Texture2D marker_1;
@@ -16,13 +17,14 @@
 		private const String ERROR_MESSAGE = "ERROR: Find more than one contour";
 		private const int MARKERS_COUNT = 5;
 		private const int MAX_CONTURES_COUNT = 6;
-		private const int DELTA = 10; 
+		private const int DELTA = 10;
 		private List<Texture2D> textures = new List<Texture2D>();
 		private List<List<Point>> templateContours = new List<List<Point>>();
-
+			
 		protected override void Awake()
 		{
 			base.Awake();
+
 			this.forceFrontalCamera = true;
 
 			textures.Add(marker_1);
@@ -32,15 +34,15 @@
 			textures.Add(marker_5);
 
 			foreach (var texture in textures)
-            {
+			{
 				templateContours.AddRange(GetContours(texture));
 				Debug.Log(templateContours.Count);
-            }
+			}
 		}
 
 		// Our sketch generation function
 		protected override bool ProcessTexture(WebCamTexture input, ref Texture2D output)
-		{
+		{ 
 			Mat image = Unity.TextureToMat(input, TextureParameters);
 			HierarchyIndex[] hierarchy = new HierarchyIndex[0];
 
@@ -53,7 +55,7 @@
 			}
 
 			output = Unity.MatToTexture(image, output);
-			//Debug.Log("CONTOURS COUNT: " + allContours.Count);
+			Debug.Log("CONTOURS COUNT: " + allContours.Count);
 
 			if (allContours.Count == MAX_CONTURES_COUNT)
 			{
@@ -79,7 +81,7 @@
 		}
 
 		private List<List<Point>> GetContours(Texture2D texture)
-        {
+		{
 			Mat image = Unity.TextureToMat(texture);
 			HierarchyIndex[] hierarchy = new HierarchyIndex[0];
 			return GetContours(image, ref hierarchy);
@@ -109,31 +111,31 @@
 		}
 
 		private bool checkContures(List<Point> mainTexture, List<Point> currentTexture)
-        {
+		{
 			int minCount = 0;
-			if(mainTexture.Count > currentTexture.Count)
-            {
+			if (mainTexture.Count > currentTexture.Count)
+			{
 				minCount = currentTexture.Count;
 			}
 			else
-            {
+			{
 				minCount = mainTexture.Count;
 
 			}
 			for (int i = 0; i < minCount; i++)
-            {
+			{
 				Point mainPoint = mainTexture[i];
 				Point currentPoint = currentTexture[i];
-				
-				if(((mainPoint.X - currentPoint.X) > DELTA) || ((mainPoint.X - currentPoint.X) < -DELTA)
+
+				if (((mainPoint.X - currentPoint.X) > DELTA) || ((mainPoint.X - currentPoint.X) < -DELTA)
 					||
 					((mainPoint.Y - currentPoint.Y) > DELTA) || ((mainPoint.Y - currentPoint.Y) < -DELTA))
-                {
+				{
 					return false;
-                }
+				}
 			}
-			
+
 			return true;
-        }
+		}
 	}
 }
