@@ -7,7 +7,7 @@ public class RawImageVirtualWebCamTexture : MonoBehaviour
 
     void Start()
     {
-        GameObject obj = GameObject.Find("RawImageTransform");
+        GameObject obj = GameObject.Find("RawImage");
         rawimage = obj.GetComponent<RawImage>();
     }
 
