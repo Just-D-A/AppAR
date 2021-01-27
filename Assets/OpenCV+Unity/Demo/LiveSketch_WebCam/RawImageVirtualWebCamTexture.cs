@@ -3,20 +3,21 @@ using UnityEngine.UI;
 
 public class RawImageVirtualWebCamTexture : MonoBehaviour
 {
-    private RawImage rawimage;
-
-    void Start()
+    public RawImage image;
+    private RenderTexture _texture;
+    private void Start()
     {
-        GameObject obj = GameObject.Find("RawImage");
-        rawimage = obj.GetComponent<RawImage>();
+        _texture = new RenderTexture(500, 500, 24) { format = RenderTextureFormat.ARGB32 };
+        Camera.main.targetTexture = _texture;
     }
 
-    void OnRenderImage(RenderTexture source, RenderTexture destination)
+    private void Update()
     {
-        if (source != null)
-        {
-            rawimage.texture = source;
-        }
-        Graphics.Blit(source, destination);
+        image.texture = _texture;
+    }
+
+    private void OnDestroy()
+    {
+        _texture.Release();
     }
 }
