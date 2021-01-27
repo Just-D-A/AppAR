@@ -5,7 +5,6 @@
 	using OpenCvSharp;
 	using System.Collections.Generic;
 
-
 	public class LiveSketchScript : WebCamera
 	{
 		public Texture2D marker_1;
